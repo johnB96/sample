@@ -26,13 +26,13 @@ Clone the repo
 git clone https://github.com/johnB96/sample.git
 ```
 
-Building using gradle, after changing to the sample directory
+Building using gradle, after changing to the /sample directory
 
 ```
 ./gradlew build
 ```
 
-Run the Spring Boot application using gradle
+Run the Spring Boot application using gradle, after changing to the /sample directory
 
 ```
 ./gradlew bootRun
