@@ -1,6 +1,8 @@
 # Transform an Integer to English via REST API
 
-Simple REST API for translating any integer from Integer.MIN_VALUE to Integer.MAX_VALUE into English. For example:
+Simple REST API for translating any integer from Integer.MIN_VALUE to Integer.MAX_VALUE into English.
+
+For example:
 
 ```
 intput: 4
@@ -18,19 +20,19 @@ docker (for publishing and running)
 
 ### Installing
 
-clone the repo
+Clone the repo
 
 ```
-https://github.com/johnB96/sample.git
+git clone https://github.com/johnB96/sample.git
 ```
 
-building using gradle
+Building using gradle, after changing to the sample directory
 
 ```
 ./gradlew build
 ```
 
-run the Spring Boot application using gradle
+Run the Spring Boot application using gradle
 
 ```
 ./gradlew bootRun
@@ -78,7 +80,47 @@ Run unit tests and publish jacoco coverage report using gradle
 
 ## Deployment
 
-TODO deploy
+Note, for deployment to a public cloud, the deployed repository needs to be visible to the cloud provider.
+
+In other words, deploy to their private repositories or publish to a public one.
+
+### Preparing image for pushing and running locally
+
+To build app.jar and publish the image
+```
+./gradlew clean build
+docker build --build-arg JAR_FILE=build/libs/*.jar -t jbedalov/sample:v1 .
+```
+
+To run the image; note -p 8080:8080 is required to expose to the port locally
+```
+docker run -p 8080:8080 -t jbedalov/sample:v1
+```
+
+## Docker Hub - gradle deploy
+
+To build app.jar and publish the image
+```
+./gradlew deploy
+```
+
+## Docker Hub - push and pull
+
+To build app.jar and publish the image
+```
+./gradlew clean build
+docker build --build-arg JAR_FILE=build/libs/*.jar -t jbedalov/sample:v1 .
+```
+
+Push the image to the a public or private repository (in this case docker hub)
+```
+docker login && docker push jbedalov/sample:v1
+```
+
+To pull from the external repository (CI/CD pipeline can publish this image to cloud for running)
+```
+docker login && docker pull jbedalov/sample:v1
+```
 
 ## Built With
 
