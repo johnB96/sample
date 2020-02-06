@@ -97,13 +97,6 @@ To run the image; note -p 8080:8080 is required to expose to the port locally
 docker run -p 8080:8080 -t jbedalov/sample:v1
 ```
 
-## Docker Hub - gradle deploy
-
-To build app.jar and publish the image
-```
-./gradlew deploy
-```
-
 ## Docker Hub - push and pull
 
 To build app.jar and publish the image
@@ -117,7 +110,7 @@ Push the image to the a public or private repository (in this case docker hub)
 docker login && docker push jbedalov/sample:v1
 ```
 
-To pull from the external repository (CI/CD pipeline can publish this image to cloud for running)
+To pull from the external repository (CI/CD pipeline can push this image to your cloud provider)
 ```
 docker login && docker pull jbedalov/sample:v1
 ```
