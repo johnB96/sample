@@ -27,9 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TransformationControllerTest {
 
     private static final String MOCK_REQUEST_FORMAT = "{\"input\":%d}";
-    private static final String MOCK_RESULTS_FORMAT = "{\"input\":%d,\"output\":\"%s\",\"language\":\"%s\"}";
+    private static final String MOCK_RESULTS_FORMAT = "{\"input\":%d,\"output\":\"%s\"}";
     private static final String FIXED_RESULT = "foo";
-    private static final String FIXED_LANGUAGE = "bar";
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,7 +39,6 @@ public class TransformationControllerTest {
     @Before
     public void setUp() {
         doReturn(FIXED_RESULT).when(transformer).transform(anyInt());
-        doReturn(FIXED_LANGUAGE).when(transformer).getLanguage();
     }
 
     @Test
@@ -82,7 +80,7 @@ public class TransformationControllerTest {
     }
 
     private String getMockResult(Integer input) {
-        return String.format(MOCK_RESULTS_FORMAT, input, FIXED_RESULT, FIXED_LANGUAGE);
+        return String.format(MOCK_RESULTS_FORMAT, input, FIXED_RESULT);
     }
 
     private MockHttpServletRequestBuilder getPost(String request) {

@@ -23,7 +23,6 @@ public class TransformationController {
         TransformationResponse transformationResponse = new TransformationResponse();
         transformationResponse.setOutput(transformer.transform(input));
         transformationResponse.setInput(input);
-        transformationResponse.setLanguage(transformer.getLanguage());
         return transformationResponse;
     }
 }

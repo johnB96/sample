@@ -9,11 +9,4 @@ public interface Transformer {
      * @return the input as readable word.
      */
     String transform(int input);
-
-    /**
-     * Returns implementation language, should return names from HttpServletRequest.getLocale().getDisplayLanguage();
-     *
-     * @return implementation language.
-     */
-    String getLanguage();
 }
