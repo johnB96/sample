@@ -22,15 +22,3 @@ test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
-
-tasks.register("deploy") {
-    dependsOn clean
-    dependsOn build
-    dependsOn test
-    doLast {
-        println 'to deploy run the following:'
-        println 'docker build --build-arg JAR_FILE=build/libs/*.jar -t jbedalov/sample:v1 .'
-        println 'docker login && docker push jbedalov/sample:v1'
-        println 'docker login && docker pull jbedalov/sample:v1'
-    }
-}

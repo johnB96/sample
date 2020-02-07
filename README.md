@@ -16,6 +16,7 @@ output: Four
 ```
 java SDK
 docker (for publishing and running)
+Google Cloud SDK (for deploying to google cloud)
 ```
 
 ### Installing
@@ -80,6 +81,30 @@ Run unit tests and publish jacoco coverage report using gradle
 ```
 
 ## Deployment
+
+### Google Cloud
+
+Note, the follow sections assumes you have installed Google Cloud SDK. See: https://cloud.google.com/sdk/docs/
+
+To deploy, from the /samples director run, see also: https://www.youtube.com/watch?v=qx_T6-EKkBE
+
+```
+gcloud app deploy build/libs/sample-1.0-SNAPSHOT.jar
+```
+
+If you are signed into Google Cloud, those credentials will be used, otherwise, you may need to sign in via
+
+```
+gcloud auth login
+```
+
+After successful deployment, the REST API will be accessible at
+
+```
+https://transform-sample.appspot.com/transform
+```
+
+### Docker
 
 Note, for deployment to a public cloud, the deployed repository needs to be visible to the cloud provider.
 
