@@ -9,4 +9,11 @@ public interface Transformer {
      * @return the input as readable word.
      */
     String transform(int input);
+
+    /**
+     * Implementing classes return their specific language.
+     *
+     * @return language of implementation.
+     */
+    String getLanguage();
 }

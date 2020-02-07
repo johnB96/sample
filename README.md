@@ -54,7 +54,8 @@ returns
 ```
 {
     "input": 4,
-    "output": "Four"
+    "output": "Four",
+    "language": "English"
 }
 ```
 
@@ -68,7 +69,7 @@ curl --location --request POST 'http://localhost:8080/transform' \
 
 returns
 ```
-{"input":4,"output":"Four"}
+{"input":4,"output":"Four","language":"English"}
 ```
 
 ## Running the tests

@@ -42,6 +42,7 @@ public class TransformEnglishImpl implements Transformer {
             "ninety"
     };
 
+    private static final String ENGLISH = "English";
     private static final String HUNDRED = " hundred";
     private static final String THOUSAND = " thousand";
     private static final String MILLION = " million";
@@ -77,6 +78,11 @@ public class TransformEnglishImpl implements Transformer {
         return uppercaseFirstLetter(transformUnsigned(input));
     }
 
+    @Override
+    public String getLanguage() {
+        return ENGLISH;
+    }
+
     private String uppercaseFirstLetter(String val) {
         return StringUtils.capitalize(val);
     }
@@ -92,7 +98,7 @@ public class TransformEnglishImpl implements Transformer {
     }
 
     /**
-     * Transforms an unsigned int.
+     * Transforms an unsigned int, intended to be called recursively.
      *
      * @param unsignedInput primitive unsigned int.
      * @return unsigned English value.

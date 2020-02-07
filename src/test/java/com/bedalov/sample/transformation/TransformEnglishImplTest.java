@@ -61,4 +61,10 @@ public class TransformEnglishImplTest {
         assertEquals("Negative nineteen",
                 transformer.transform(-19));
     }
+
+    @Test
+    public void getLanguage_givenAutowired_thenLanguageIsEnglish() {
+        assertEquals("English",
+                transformer.getLanguage());
+    }
 }
