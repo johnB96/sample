@@ -26,13 +26,13 @@ Clone the repo
 git clone https://github.com/johnB96/sample.git
 ```
 
-Building using gradle, after changing to the sample directory
+Building using gradle, after changing to the /sample directory
 
 ```
 ./gradlew build
 ```
 
-Run the Spring Boot application using gradle
+Run the Spring Boot application using gradle, after changing to the /sample directory
 
 ```
 ./gradlew bootRun
@@ -111,7 +111,7 @@ Push the image to the a public or private repository (in this case docker hub)
 docker login && docker push jbedalov/sample:v1
 ```
 
-To pull from the external repository (CI/CD pipeline can publish this image to cloud for running)
+To pull from the external repository (CI/CD pipeline can push this image to your cloud provider)
 ```
 docker login && docker pull jbedalov/sample:v1
 ```
