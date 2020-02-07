@@ -10,19 +10,20 @@ import javax.validation.Valid;
 @RestController
 public class TransformationController {
 
-    static final String TRANSFORM_TO_ENGLISH = "/transformToEnglish";
+    static final String TRANSFORM = "/transform";
     private final Transformer transformer;
 
     public TransformationController(Transformer transformer) {
         this.transformer = transformer;
     }
 
-    @PostMapping(value = TRANSFORM_TO_ENGLISH)
-    public TransformationResponse transformToEnglish(@Valid @RequestBody TransformationRequest request) {
-        TransformationResponse transformationResponse = new TransformationResponse();
+    @PostMapping(value = TRANSFORM)
+    public TransformationResponse transform(@Valid @RequestBody TransformationRequest request) {
         Integer input = request.getInput();
-        transformationResponse.setOutput(transformer.transformToEnglish(input));
+        TransformationResponse transformationResponse = new TransformationResponse();
+        transformationResponse.setOutput(transformer.transform(input));
         transformationResponse.setInput(input);
+        transformationResponse.setLanguage(transformer.getLanguage());
         return transformationResponse;
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import static com.bedalov.sample.web.TransformationController.TRANSFORM_TO_ENGLISH;
+import static com.bedalov.sample.web.TransformationController.TRANSFORM;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -27,8 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TransformationControllerTest {
 
     private static final String MOCK_REQUEST_FORMAT = "{\"input\":%d}";
-    private static final String MOCK_RESULTS_FORMAT = "{\"input\":%d,\"output\":\"%s\"}";
+    private static final String MOCK_RESULTS_FORMAT = "{\"input\":%d,\"output\":\"%s\",\"language\":\"%s\"}";
     private static final String FIXED_RESULT = "foo";
+    private static final String FIXED_LANGUAGE = "bar";
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,11 +39,12 @@ public class TransformationControllerTest {
 
     @Before
     public void setUp() {
-        doReturn(FIXED_RESULT).when(transformer).transformToEnglish(anyInt());
+        doReturn(FIXED_RESULT).when(transformer).transform(anyInt());
+        doReturn(FIXED_LANGUAGE).when(transformer).getLanguage();
     }
 
     @Test
-    public void transformToEnglish_givenValidPostWithIntMin_thenResultsMatchExpected() throws Exception {
+    public void transform_givenValidPostWithIntMin_thenResultsMatchExpected() throws Exception {
         Integer input = Integer.MIN_VALUE;
 
         mockMvc.perform(getPost(getMockRequest(input)))
@@ -52,7 +54,7 @@ public class TransformationControllerTest {
     }
 
     @Test
-    public void transformToEnglish_givenInvalidPostWithNull_thenBadRequest() throws Exception {
+    public void transform_givenInvalidPostWithNull_thenBadRequest() throws Exception {
         Integer input = null;
 
         mockMvc.perform(getPost(getMockRequest(input)))
@@ -61,7 +63,7 @@ public class TransformationControllerTest {
     }
 
     @Test
-    public void transformToEnglish_givenValidPostWithLeadingZero_thenZerosAreRemoved() throws Exception {
+    public void transform_givenValidPostWithLeadingZero_thenZerosAreRemoved() throws Exception {
         mockMvc.perform(getPost("{\"input\":004}"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -69,7 +71,7 @@ public class TransformationControllerTest {
     }
 
     @Test
-    public void transformToEnglish_givenInvalidPostWithString_thenBadRequest() throws Exception {
+    public void transform_givenInvalidPostWithString_thenBadRequest() throws Exception {
         mockMvc.perform(getPost("{\"input\":\"foo\"}"))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
@@ -80,10 +82,10 @@ public class TransformationControllerTest {
     }
 
     private String getMockResult(Integer input) {
-        return String.format(MOCK_RESULTS_FORMAT, input, FIXED_RESULT);
+        return String.format(MOCK_RESULTS_FORMAT, input, FIXED_RESULT, FIXED_LANGUAGE);
     }
 
     private MockHttpServletRequestBuilder getPost(String request) {
-        return post(TRANSFORM_TO_ENGLISH).content(request).contentType(MediaType.APPLICATION_JSON);
+        return post(TRANSFORM).content(request).contentType(MediaType.APPLICATION_JSON);
     }
 }

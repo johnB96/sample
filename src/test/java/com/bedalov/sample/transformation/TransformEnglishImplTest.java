@@ -8,35 +8,35 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 
-@SpringBootTest(classes = TransformerImpl.class)
+@SpringBootTest(classes = TransformEnglishImpl.class)
 @RunWith(SpringRunner.class)
-public class TransformerImplTest {
+public class TransformEnglishImplTest {
 
     @Autowired
     private Transformer transformer;
 
     @Test
-    public void transformToEnglish_givenIntMin_thenExpectedEqualsActual() {
+    public void transform_givenIntMin_thenExpectedEqualsActual() {
         assertEquals("Negative two billion one hundred and forty seven million four hundred and eighty three thousand six hundred and forty eight",
-                transformer.transformToEnglish(Integer.MIN_VALUE));
+                transformer.transform(Integer.MIN_VALUE));
     }
 
     @Test
-    public void transformToEnglish_givenIntMax_thenExpectedEqualsActual() {
+    public void transform_givenIntMax_thenExpectedEqualsActual() {
         assertEquals("Two billion one hundred and forty seven million four hundred and eighty three thousand six hundred and forty seven",
-                transformer.transformToEnglish(Integer.MAX_VALUE));
+                transformer.transform(Integer.MAX_VALUE));
     }
 
     @Test
-    public void transformToEnglish_givenZero_thenExpectedEqualsActual() {
+    public void transform_givenZero_thenExpectedEqualsActual() {
         assertEquals("Zero",
-                transformer.transformToEnglish(0));
+                transformer.transform(0));
     }
 
     /**
      * Typically things that are strange like this I like to include a test since
      * if this changes, we get a early detection from why something breaks.
-     *
+     * <p>
      * Here's more information on this: https://stackoverflow.com/q/5444611/4513382
      */
     @Test
@@ -45,20 +45,25 @@ public class TransformerImplTest {
     }
 
     @Test
-    public void transformToEnglish_givenNumberThatEndsWithZeros_thenExpectedEqualsActual() {
+    public void transform_givenNumberThatEndsWithZeros_thenExpectedEqualsActual() {
         assertEquals("One thousand two hundred",
-                transformer.transformToEnglish(1200));
+                transformer.transform(1200));
     }
 
     @Test
-    public void transformToEnglish_givenNumberThatEndsWithZeros_thenExpectedEqualsActual2() {
+    public void transform_givenNumberThatEndsWithZeros_thenExpectedEqualsActual2() {
         assertEquals("One thousand two hundred and one",
-                transformer.transformToEnglish(1201));
+                transformer.transform(1201));
     }
 
     @Test
-    public void transformToEnglish_givenNegativeNumber_thenExpectedEqualsActual() {
+    public void transform_givenNegativeNumber_thenExpectedEqualsActual() {
         assertEquals("Negative nineteen",
-                transformer.transformToEnglish(-19));
+                transformer.transform(-19));
+    }
+
+    @Test
+    public void getLanguage_givenTransformIsAutowired_thenLanguageIsEnglish() {
+        assertEquals("English", transformer.getLanguage());
     }
 }

@@ -2,8 +2,9 @@ package com.bedalov.sample.web;
 
 public class TransformationResponse {
 
-    Integer input;
-    String output;
+    private Integer input;
+    private String output;
+    private String language;
 
     public Integer getInput() {
         return input;
@@ -19,5 +20,13 @@ public class TransformationResponse {
 
     public void setOutput(String output) {
         this.output = output;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

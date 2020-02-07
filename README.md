@@ -43,7 +43,7 @@ Run the Spring Boot application using gradle
 ### HTTP
 
 ```
-POST http://localhost:8080/transformToEnglish
+POST http://localhost:8080/transform
 Content-Type: application/json
 {
     "input": 4
@@ -54,21 +54,22 @@ returns
 ```
 {
     "input": 4,
-    "output": "Four"
+    "output": "Four",
+    "language":"English"
 }
 ```
 
 ### Curl
 
 ```
-curl --location --request POST 'http://localhost:8080/transformToEnglish' \
+curl --location --request POST 'http://localhost:8080/transform' \
 --header 'Content-Type: application/json' \
 --data-raw '{"input": 4}'
 ```
 
 returns
 ```
-{"input":4,"output":"Four"}
+{"input":4,"output":"Four","language":"English"}
 ```
 
 ## Running the tests
@@ -95,13 +96,6 @@ docker build --build-arg JAR_FILE=build/libs/*.jar -t jbedalov/sample:v1 .
 To run the image; note -p 8080:8080 is required to expose to the port locally
 ```
 docker run -p 8080:8080 -t jbedalov/sample:v1
-```
-
-## Docker Hub - gradle deploy
-
-To build app.jar and publish the image
-```
-./gradlew deploy
 ```
 
 ## Docker Hub - push and pull

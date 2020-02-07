@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
-public class TransformerImpl implements Transformer {
+public class TransformEnglishImpl implements Transformer {
 
     private static final String[] FIRST_NINETEEN = {
             "",
@@ -42,6 +42,7 @@ public class TransformerImpl implements Transformer {
             "ninety"
     };
 
+    private static final String ENGLISH = "English";
     private static final String HUNDRED = " hundred";
     private static final String THOUSAND = " thousand";
     private static final String MILLION = " million";
@@ -64,7 +65,7 @@ public class TransformerImpl implements Transformer {
      * @return
      */
     @Override
-    public String transformToEnglish(int input) {
+    public String transform(int input) {
         if (input == 0) {
             return ZERO;
         }
@@ -77,8 +78,13 @@ public class TransformerImpl implements Transformer {
         return uppercaseFirstLetter(transformUnsigned(input));
     }
 
-    private String uppercaseFirstLetter(String english) {
-        return StringUtils.capitalize(english);
+    @Override
+    public String getLanguage() {
+        return ENGLISH;
+    }
+
+    private String uppercaseFirstLetter(String val) {
+        return StringUtils.capitalize(val);
     }
 
     /**
