@@ -2,6 +2,7 @@ package com.bedalov.sample.web;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +12,7 @@ public class TransformationRequest {
     private Integer input;
 
     @JsonCreator
-    public TransformationRequest(Integer input) {
+    public TransformationRequest(@JsonProperty("input") Integer input) {
         this.input = input;
     }
 
