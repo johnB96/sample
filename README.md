@@ -106,9 +106,9 @@ https://transform-sample.appspot.com/transform
 
 ### Docker
 
-Note, for deployment to a public cloud, the deployed repository needs to be visible to the cloud provider.
+Note, for deployment to a public cloud, the container registry needs to be visible to the cloud provider.
 
-In other words, deploy to their private repositories or publish to a public one.
+In other words, push to their private container registry or push to a public one such as docker hub.
 
 ### Preparing image for pushing and running locally
 
@@ -131,12 +131,12 @@ To build app.jar and publish the image
 docker build --build-arg JAR_FILE=build/libs/*.jar -t jbedalov/sample:v1 .
 ```
 
-Push the image to the a public or private repository (in this case docker hub)
+Push the image to a container registry (in this case docker hub)
 ```
 docker login && docker push jbedalov/sample:v1
 ```
 
-To pull from the external repository (CI/CD pipeline can push this image to your cloud provider)
+To pull from the container registry (CI/CD pipeline can push this image to your cloud provider)
 ```
 docker login && docker pull jbedalov/sample:v1
 ```
