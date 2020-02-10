@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class TransformationRequest {
 
     @NotNull(message = "Null is not a valid input.")
-    private Integer input;
+    private final Integer input;
 
     @JsonCreator
     public TransformationRequest(@JsonProperty(value = "input", required = true) Integer input) {
