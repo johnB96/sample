@@ -12,7 +12,7 @@ public class TransformationRequest {
     private Integer input;
 
     @JsonCreator
-    public TransformationRequest(@JsonProperty("input") Integer input) {
+    public TransformationRequest(@JsonProperty(value = "input", required = true) Integer input) {
         this.input = input;
     }
 
